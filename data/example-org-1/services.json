@@ -1,0 +1,79 @@
+{
+    "services": [
+      {
+        "name": "Frontend Development",
+        "employees": [
+          {
+            "name": "Mike",
+            "role": "Frontend Engineer",
+            "team": "Frontend Product Team",
+            "github_username": "mike",
+            "email": "mkovetsky@gmail.com"
+          }
+        ]
+      },
+      {
+        "name": "Infrastructure",
+        "employees": [
+          {
+            "name": "Nate",
+            "role": "DevOps Engineer",
+            "team": "Infrastructure",
+            "github_username": "Nate",
+            "email": "nate@gmail.com"
+          }
+        ]
+      },
+      {
+        "name": "Mobile Development",
+        "employees": [
+          {
+            "name": "Emma",
+            "role": "Mobile Developer",
+            "team": "Mobile Development Team",
+            "github_username": "emma_mobiledev",
+            "email": "emma@MyStartup.ai"
+          },
+          {
+            "name": "Ethan",
+            "role": "Mobile UX/UI Designer",
+            "team": "Mobile Development Team",
+            "github_username": "ethan_design",
+            "email": "ethan@MyStartup.ai"
+          }
+        ]
+      },
+      {
+        "name": "Data Analytics",
+        "employees": [
+          {
+            "name": "Liam",
+            "role": "Data Analyst",
+            "team": "Data Analytics Team",
+            "github_username": "liam_data",
+            "email": "liam@MyStartup.ai"
+          },
+          {
+            "name": "Sophia",
+            "role": "Data Engineer",
+            "team": "Data Analytics Team",
+            "github_username": "sophia_engineer",
+            "email": "sophia@MyStartup.ai"
+          }
+        ]
+      },
+      {
+        "name": "Customer Support",
+        "employees": [
+          {
+            "name": "Olivia",
+            "role": "Customer Support Specialist",
+            "team": "Customer Support Team",
+            "github_username": "olivia_support",
+            "email": "olivia@MyStartup.ai"
+          }
+        ]
+      }
+    ]
+  }
+  
