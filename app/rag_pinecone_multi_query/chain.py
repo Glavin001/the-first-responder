@@ -1,13 +1,14 @@
 import os
 
 from langchain.retrievers.multi_query import MultiQueryRetriever
-from langchain_community.chat_models import ChatOpenAI
+# from langchain_community.chat_models import ChatOpenAI
 from langchain_community.embeddings import OpenAIEmbeddings
 from langchain_community.vectorstores import Pinecone
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.pydantic_v1 import BaseModel
 from langchain_core.runnables import RunnableParallel, RunnablePassthrough
+from langchain_together import Together
 
 from .embeddings import embeddings
 
@@ -39,7 +40,16 @@ PINECONE_INDEX_NAME = os.environ.get("PINECONE_INDEX", "langchain-test")
 # Set up index with multi query retriever
 vectorstore = Pinecone.from_existing_index(PINECONE_INDEX_NAME, embeddings)
 
-model = ChatOpenAI(temperature=0)
+llm = Together(
+    model="togethercomputer/RedPajama-INCITE-7B-Base",
+    temperature=0.7,
+    max_tokens=128,
+    top_k=1,
+    # together_api_key="..."
+)
+model = llm
+
+# model = ChatOpenAI(temperature=0)
 retriever = MultiQueryRetriever.from_llm(
     retriever=vectorstore.as_retriever(), llm=model
 )
@@ -52,7 +62,7 @@ Question: {question}
 prompt = ChatPromptTemplate.from_template(template)
 
 # RAG
-model = ChatOpenAI()
+# model = ChatOpenAI()
 chain = (
     RunnableParallel({"context": retriever, "question": RunnablePassthrough()})
     | prompt

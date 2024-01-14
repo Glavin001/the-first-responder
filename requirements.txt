@@ -4,3 +4,5 @@ faiss-cpu==1.7.4
 langchain-together==0.0.2.post1
 langserve[server]>=0.0.30
 langchain-cli>=0.0.15
+pinecone-client==2.2.4
+unstructured==0.12.0
