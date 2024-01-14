@@ -8,7 +8,7 @@ Install the LangChain CLI if you haven't yet
 
 ```bash
 pip install -U langchain-cli
-poetry install
+pip install -r requirements.txt
 ```
 
 ## Usage
