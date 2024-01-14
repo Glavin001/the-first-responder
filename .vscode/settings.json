@@ -1,5 +1,4 @@
 {
     "python.analysis.extraPaths": [
-        "./packages/rag-pinecone-multi-query"
     ]
 }

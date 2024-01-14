@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
 from langserve import add_routes
-from rag_pinecone_multi_query import chain as rag_pinecone_multi_query_chain
+from .rag_pinecone_multi_query import chain as rag_pinecone_multi_query_chain
 
 app = FastAPI()
 

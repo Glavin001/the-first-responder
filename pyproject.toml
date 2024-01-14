@@ -14,6 +14,7 @@ uvicorn = "^0.23.2"
 langserve = {extras = ["server"], version = ">=0.0.30"}
 pydantic = "<2"
 rag-pinecone-multi-query = {path = "packages/rag-pinecone-multi-query", develop = true}
+faiss-cpu = "^1.7.4"
 
 
 [tool.poetry.group.dev.dependencies]
