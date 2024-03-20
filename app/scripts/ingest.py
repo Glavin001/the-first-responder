@@ -84,23 +84,42 @@ semantic_splitter = SemanticChunker(embeddings)
 # vectorstore = Pinecone.from_existing_index(PINECONE_INDEX_NAME, embeddings)
 
 # The storage layer for the parent documents
-store = InMemoryStore()
-retriever = ParentDocumentRetriever(
-    vectorstore=vectorstore,
-    docstore=store,
-    child_splitter=child_splitter,
-    # child_splitter=semantic_splitter,
-    # child_splitter=markdown_splitter,
-)
+# store = InMemoryStore()
+from app.rag_pinecone_multi_query.parent_doc_store import store
+# retriever = ParentDocumentRetriever(
+#     vectorstore=vectorstore,
+#     docstore=store,
+#     child_splitter=child_splitter,
+#     # child_splitter=semantic_splitter,
+#     # child_splitter=markdown_splitter,
+# )
 
-
+from app.rag_pinecone_multi_query.retriever import create_retriever
+retriever = create_retriever(store)
 
 # retriever.add_documents(docs, ids=None)
 # Batch into groups of 5
-batch_size = 5
+batch_size = 1
 for i in range(0, len(docs), batch_size):
     print(i)
     docs_batch = docs[i:i+batch_size]
     retriever.add_documents(docs_batch, ids=None)
+    break
 
 # added all
+# # Dump the store
+# keys = list(store.yield_keys())
+# print(keys)
+# print(len(keys))
+# values = store.mget(keys)
+# print(values)
+
+# Write to disk
+import pickle
+
+def save_object(obj, filename):
+    with open(filename, 'wb') as outp:  # Overwrites any existing file.
+        pickle.dump(obj, outp, pickle.HIGHEST_PROTOCOL)
+
+# save_object(retriever, 'retriever.pkl')
+save_object(store, 'store.pkl')

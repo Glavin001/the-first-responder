@@ -14,6 +14,7 @@ pip install -r requirements.txt
 ## Usage
 
 ```bash
+export PYTHONPATH="."
 langchain serve
 ```
 

@@ -10,6 +10,9 @@ from langchain_core.pydantic_v1 import BaseModel
 from langchain_core.runnables import RunnableParallel, RunnablePassthrough
 from langchain_together import Together
 
+from app.rag_pinecone_multi_query.parent_doc_store import store
+from app.rag_pinecone_multi_query.retriever import create_retriever
+
 from .embeddings import embeddings
 
 if os.environ.get("PINECONE_API_KEY", None) is None:
@@ -41,18 +44,25 @@ PINECONE_INDEX_NAME = os.environ.get("PINECONE_INDEX", "langchain-test")
 vectorstore = Pinecone.from_existing_index(PINECONE_INDEX_NAME, embeddings)
 
 llm = Together(
-    model="togethercomputer/RedPajama-INCITE-7B-Base",
+    # model="togethercomputer/RedPajama-INCITE-7B-Base",
+    model="mistralai/Mixtral-8x7B-Instruct-v0.1",
     temperature=0.7,
     max_tokens=128,
     top_k=1,
     # together_api_key="..."
+    together_api_key=os.environ.get("TOGETHER_API_KEY", None),
 )
 model = llm
 
+# child_retriever = create_retriever(store)
+retriever = create_retriever(store)
+
 # model = ChatOpenAI(temperature=0)
-retriever = MultiQueryRetriever.from_llm(
-    retriever=vectorstore.as_retriever(), llm=model
-)
+# retriever = MultiQueryRetriever.from_llm(
+#     # retriever=vectorstore.as_retriever(),
+#     retriever=child_retriever,
+#     llm=model
+# )
 
 # RAG prompt
 template = """Answer the question based only on the following context:
